@@ -1,0 +1,1085 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Flutter Codelab #2 - Creating The Landing Page - Building Layouts in Flutter (Workshop)</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="flutter-codelab2"
+                  title="Flutter Codelab #2 - Creating The Landing Page - Building Layouts in Flutter (Workshop)"
+                  environment="web"
+                  feedback-link="https://romanjustcodes.web.app">
+    
+      <google-codelab-step label="Overview" duration="0">
+        <h2 is-upgraded>What You&#39;ll Build in this Codelab:</h2>
+<ul>
+<li>Create the Landing Page</li>
+<li>Create the individual widgets that make up this page widget</li>
+<li>Dive into building UI layouts in Flutter using just core widgets</li>
+</ul>
+<p class="image-container"><img alt="Landing Page" src="img/df38ed861cb202ef.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Initial Setup" duration="0">
+        <p>The following illustration shows a schematic view of the widget composition we&#39;ll accomplish while building the layout for our landing page widget:</p>
+<p class="image-container"><img alt="Landing Page Schematics" src="img/6036ee3cd256eabe.png"></p>
+<p>We&#39;ll further break down each of the widgets depicted above for further breakdown and composition.</p>
+<aside class="special"><p>Breaking your design into widgets facilitates the development down the road, since you think of widget composition from the beginning, and breaking your application into the logical pieces that make up your appplication by functionality or feature makes for good practice.</p>
+</aside>
+<p>Since we&#39;ll be developing this page further, we want our application to skip the splash screen while we work on it. Therefore, you should temporarily point your main application widget to this page.</p>
+<p>In the <strong>main</strong> method, comment out the <strong><em>SplashPage</em></strong> value assigned to the <strong>home</strong> property of the <strong>MaterialApp</strong> and add the <strong>MountsApp</strong> instead, as shown below:</p>
+<p class="image-container"><img alt="main home MountsApp" src="img/b81d7cc6756c8cbb.png"></p>
+<aside class="warning"><p>This is just a temporary change while we develop this page. Once you&#39;re done, you should revert these changes. Keep it in mind!</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creating The Landing Page / Laying Down the Foundation" duration="0">
+        <p>Let&#39;s start working on the landing page we started in the previous codelab called <strong>MountsApp</strong> and do some refactoring - we&#39;ll start from the top and work our way down.</p>
+<p>In the existing <strong>build</strong> method, we are returning a <strong>Scaffold</strong> widget, which is ideal as the foundation of our visual layout structure, so we&#39;ll keep it.</p>
+<p>Inside of the <strong>Scaffold</strong>, let&#39;s populate both the <strong>appBar</strong> and <strong>drawer</strong> property by assigning to them an <strong>AppBar</strong> widget and a <strong>Drawer</strong> widget respectively. An <a href="https://api.flutter.dev/flutter/material/AppBar-class.html" target="_blank"><strong>AppBar</strong></a> widget - just like the name implies - is the application&#39;s topmost bar, where we can place a title, navigation icons, menu icons, etc. The <a href="https://api.flutter.dev/flutter/material/Drawer-class.html" target="_blank"><strong>Drawer</strong></a> widget is a panel that slides out horizontally from the edge of a <strong>Scaffold</strong> widget, used for menus, navigation links, etc.</p>
+<p>Your code should look as follows:</p>
+<p class="image-container"><img alt="Scaffold" src="img/3f12e9666234f104.png"></p>
+<h2 is-upgraded>Change the Scaffold&#39;s background color</h2>
+<p>Add an additional property to the Scaffold widget, called <strong>backgroundColor</strong> and set it to <strong><em>Colors.white</em></strong>. This will change its background color to white and serve as the background color to all other widgets we&#39;ll place inside of it.</p>
+<p class="image-container"><img alt="Scaffold background" src="img/8f447cdd1a2b4d34.png"></p>
+<aside class="special"><p>If you hit <strong>Run</strong> on DartPad now to run the app, this is what you&#39;ll see (by default, and when you expand the drawer by clicking on the hamburger menu on the top left):</p>
+</aside>
+<p class="image-container"><img alt="Scaffold with AppBar and Drawer" src="img/9a9903586bc41f9f.png"></p>
+<p>It looks pretty bare now, and we want to differentiate our app from others, so we&#39;ll further customize each one of this components, starting from the <strong>AppBar</strong> widget. Let&#39;s proceed!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creating the App Bar" duration="0">
+        <p>In this step we&#39;ll customize the <strong>AppBar</strong> widget to match our design. We&#39;ll make the one from the left look like the one on the right, where we remove the shadow, make it transparent, the menu icon adopts our app&#39;s color palette as well as showing an icon as title.</p>
+<p class="image-container"><img alt="Scaffold Custom AppBar" src="img/5a7613ea4f934b02.png"></p>
+<h2 is-upgraded>Customizing the AppBar</h2>
+<p>Let&#39;s proceed by setting the following properties of the <strong>AppBar</strong> widget:</p>
+<ul>
+<li>Set the <strong>elevation</strong> property to <strong>0</strong> - this removes the shadow from the <strong>AppBar</strong></li>
+<li>Set its <strong>backgroundColor</strong> property to <strong>Colors.transparent</strong> to remove the default blue</li>
+<li>Set its <strong>iconTheme</strong> property to <strong>IconThemeData(color: mainColor)</strong> to set it to our <strong>mainColor</strong> property already defined above.</li>
+</ul>
+<p>Your code should look like this afterwards:</p>
+<p class="image-container"><img alt="Scaffold properties" src="img/ceee3276c5677037.png"></p>
+<h2 is-upgraded>Adding Title Icons and Placeholder Items</h2>
+<p>Let&#39;s work on adding an icon as title.</p>
+<p>Proceed to set the <strong>AppBar</strong>&#39;s <strong><em>title</em></strong> property by adding an <strong>Icon</strong> widget, wrapped inside a <strong>Center</strong> widget so it gets centered at the top, as such:</p>
+<p class="image-container"><img alt="AppBar title" src="img/aa603bf7b1b76cfe.png"></p>
+<aside class="special"><p>When setting the <strong>title</strong> property of the <strong>AppBar</strong> widget, it doesn&#39;t get truly centered since when you added a <strong>Drawer</strong>, the <strong>AppBar</strong> conveniently shows a hamburger menu automatically. In order to compensate for the space occupied by the hamburger menu on the left, you should add a placeholder widget on the right side with roughly the same dimensions.</p>
+</aside>
+<p>For the title to truly look centered, make use of an additional property of the AppBar widget called <strong>actions</strong>, which is used for adding additional options on the right side of the AppBar.</p>
+<p>We&#39;ll add an empty <strong>[SizedBox[(https://api.flutter.dev/flutter/widgets/SizedBox-class.html)</strong> widget, 40px width and height, and add it to the <strong>actions</strong> array property of the <strong>AppBar</strong>. This will add empty box to compensate for the added space by the hamburger menu on the left:</p>
+<p class="image-container"><img alt="AppBar actions" src="img/82559d9bf25bf5ce.png"></p>
+<p>If you hit <strong>Run</strong> on DartPad to test the app so far, you should see the <strong>AppBar</strong> already customized. It shows the logo, the hamburger menu with our theme color, and the title logo looks centered thanks to the trick of adding an empty space on the right via the <strong>actions</strong> property of the <strong>AppBar</strong> widget:</p>
+<p class="image-container"><img alt="DartPad AppBar Custom" src="img/8e3e9235dfbca28f.png"></p>
+<p>Let&#39;s proceed to customizing the <strong>Drawer</strong> widget a bit.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creating the Drawer" duration="0">
+        <p>We&#39;ll customize the <strong>Drawer</strong> widget a little bit. A <strong>Drawer</strong> is pretty much like any other single-child widget, in which you can add anything inside it and it will render as you please.</p>
+<p>The bottom illustration is what will look like once we customize the <strong>Drawer</strong> widget and its behavior:</p>
+<p class="image-container"><img alt="Scaffold Drawer" src="img/14474739f423c7ad.png"></p>
+<p>The following illustration is a quick schematic of what we&#39;ll be accomplishing for the <strong>Drawer</strong> widget:</p>
+<p class="image-container"><img alt="Scaffold Drawer Schematic" src="img/e97c16b9285d2bf6.png"></p>
+<p>It will have a solid color background with the app&#39;s logo at the bottom left corner.</p>
+<h2 is-upgraded>Customizing the Drawer</h2>
+<p>First, let&#39;s start by adding a <strong>Container</strong> widget as the child of the <strong>Drawer</strong> widget, and set its padding to 30px all around using <strong>EdgeInsets.all(30)</strong>. Set its background color to <strong>mainColor</strong> and align its contents to the bottom left corner by setting its <strong>alignment</strong> property to <strong>Alignment.bottomLeft</strong>:</p>
+<p class="image-container"><img alt="Scaffold Drawer" src="img/e24b217f6a185586.png"></p>
+<p>Now, add an <strong>Icon</strong> widget as the child of the newly added <strong>Container</strong> widget, with our specific icon (Icons.terrain), color of white and size 80. Your code should look like this:</p>
+<p class="image-container"><img alt="Scaffold Drawer" src="img/7de9cc45929ae1fb.png"></p>
+<p>And with that, you should be all set with customizing the <strong>Drawer</strong> widget. You can feel free to add further elements and links to your own Drawer widgets, since it provides a lot of flexibility for customization. Let&#39;s keep moving!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creating the App Header" duration="0">
+        <p>We&#39;ll proceed now with the contents of the page, starting with the header, which we&#39;re calling <strong>AppHeader</strong>. This will display a simple header with an avatar image and a few text labels.</p>
+<p class="image-container"><img alt="Scaffold AppHeader" src="img/2e249a578abdf928.png"></p>
+<p>The following is a quick schematic view of what we&#39;ll be accomplishing as far as the widgets that make up the <strong>AppHeader</strong> widget itself:</p>
+<p class="image-container"><img alt="Scaffold AppHeader Schematic" src="img/b980335f00e83f6b.png"></p>
+<h2 is-upgraded>Set up the Foundation for Scaffold Body Widgets</h2>
+<p>Before we start, we must set up what the layout strategy will be for all widgets inside the body of the Scaffold. Since the items are laid out vertically from top to bottom, we&#39;ll use a <strong>Column</strong> widget.</p>
+<p>Replace the current contents of the Scaffold&#39;s <strong>body</strong> property (the <strong>Center</strong> widget) by a <strong>Column</strong> widget, and set its <strong>crossAlignment</strong> property to <strong>CrossAlignment.start</strong>, so its children align themselves to the left, vertically, from top to bottom:</p>
+<p class="image-container"><img alt="Scaffold Body Foundation" src="img/15f7f5ec179ccb43.png"></p>
+<h2 is-upgraded>Add the AppHeader placeholder widget</h2>
+<p>Let&#39;s add the <strong>AppHeader</strong> widget as a placeholder, and as the body&#39;s <strong>Column</strong> widget&#39;s first child, by setting its <strong>children</strong> property to an array containing the <strong>AppHeader</strong> widget&#39;s placeholder, as follows:</p>
+<p class="image-container"><img alt="Scaffold Column AppHeader" src="img/ed90a4b5f10e3ddb.png"></p>
+<aside class="warning"><p>Don&#39;t worry about the error showing on the <strong>AppHeader</strong> widget - it&#39;s just that we haven&#39;t created it yet. We&#39;ll do that right now.</p>
+</aside>
+<h2 is-upgraded>Create the AppHeader widget class</h2>
+<aside class="special"><p>Before proceeding with the <strong>AppHeader</strong> widget class, add a section right under the <strong>MountsApp</strong> class definition, and call it <strong>WIDGETS</strong> - it will allow us to place and define all our widgets in this section and you&#39;ll be able to find them easily.</p>
+</aside>
+<p>Under the <strong>MountsApp</strong> class, add a comment for the widgets section:</p>
+<pre><code language="language-flutter" class="language-flutter">class MountsApp extends StatelessWidget { ... }
+
+//-----WIDGETS-----
+
+</code></pre>
+<p>Under this comment, create the class corresponding to the <strong>AppHeader</strong> widget. Add the following elements as you create the initial scaffolding for it:</p>
+<ul>
+<li>Create it as a StatelessWidget</li>
+<li>Override its <strong>build</strong> method as usual</li>
+<li>In its <strong>build</strong> method, return a <strong>Container</strong> widget</li>
+<li>For testing purposes, add a <strong>Text</strong> widget as a child of the <strong>Container</strong> widget. Add the text <strong>header</strong>.</li>
+</ul>
+<p>Your code should look as follows:</p>
+<p class="image-container"><img alt="AppHeader" src="img/382ef783327fdeb4.png"></p>
+<p>If you hit <strong>Run</strong> on DartPad now, you should be able to see the text &#34;<strong>header</strong>&#34; showing right in the slot where the header is supposed to show, as in the screenshot below:</p>
+<p class="image-container"><img alt="AppHeader" src="img/39e5d0b7ef00cf6.png"></p>
+<p>Let&#39;s continue building the structure for this widget.</p>
+<p>In the existing <strong>AppHeader</strong>&#39;s <strong>Container</strong> widget, add padding to it, but only left, top and right. The way to do it is using the <strong>EdgeInsets</strong>&#39; option <strong>only</strong>, as in <strong>EdgeInsets.only(left: 30, top: 30, right: 30)</strong>, as in the code below:</p>
+<p class="image-container"><img alt="AppHeader" src="img/2fbe20611673f03a.png"></p>
+<p>Replace the existing Container&#39;s child (the Text widget) by a <strong>Row</strong> widget. This widget will lay down its children in a row, horizontally, from left to right:</p>
+<p class="image-container"><img alt="AppHeader" src="img/333215b9518b3340.png"></p>
+<p>Add the first child to this Row, an avatar image clipped as a circle. We&#39;ll use a <strong>ClipOval</strong> widget - very suitable for these cases - which in turn will wrap an <strong>Image</strong> widget that we&#39;ll fetch from the network, with fixed dimensions (50px X 50px) with a fit of <strong>BoxFit.cover</strong> so it fills up the dimensions of the image, maintaining its aspect ratio.</p>
+<aside class="special"><p>You can grab any image off the internet - I grabbed my Github account&#39;s <a href="https://avatars.githubusercontent.com/u/5081804?v=4" target="_blank">avatar image</a>.</p>
+</aside>
+<p class="image-container"><img alt="AppHeader" src="img/406414b174141dc5.png"></p>
+<p>Next, add a <strong>Column</strong> widget, which will lay down the two <strong>Text</strong> widgets one on top of each other as a unit, next to the <strong>Image</strong>.</p>
+<p class="image-container"><img alt="AppHeader" src="img/81a1bfb658acb5e1.png"></p>
+<p>Add a <strong>Text</strong> widget for the name, and another for a short greeting. Add style to both <strong>Text</strong> widgets as needed using the <strong>TextStyle</strong> object, passing color, font size, font weight, etc.</p>
+<p class="image-container"><img alt="AppHeader" src="img/bf94707b734f36be.png"></p>
+<p>If you run it as is, you&#39;ll see that the spacing might be a bit tight between the image and the text labels:</p>
+<p class="image-container"><img alt="AppHeader" src="img/479e1564796128b4.png"></p>
+<p>Add some spacing between the ClipOval and the Column by adding a <strong>SizedBox</strong> widget, with a width of 20px:</p>
+<p class="image-container"><img alt="AppHeader" src="img/71bf5548f70b8cdb.png"></p>
+<p>With the spacing in place, this is what it looks like:</p>
+<p class="image-container"><img alt="AppHeader" src="img/56ff6f6081aab92.png"></p>
+<p>We got our header down! Congrats on making it this far! We&#39;ll proceed next to build the layout of a search bar widget. Let&#39;s proceed!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creating App Search" duration="0">
+        <aside class="special"><p>For the following widget, we will only build the layout - we won&#39;t be building any search functionality; this workshop is focused <strong>ONLY</strong> on layout building.</p>
+</aside>
+<p>Let&#39;s work on the layout for the search bar of this app, which we&#39;re calling <strong>AppSearch</strong>.</p>
+<p class="image-container"><img alt="AppHeader" src="img/ffac3ddebdb5146a.png"></p>
+<p>The following illustration shows a schematic view of what we&#39;ll be accomplishing on this widget, broken down by widget:</p>
+<p class="image-container"><img alt="AppHeader" src="img/cd23e8cc4dd62fba.png"></p>
+<p>Let&#39;s start!</p>
+<h2 is-upgraded>Creating the AppSearch class and adding the placeholder</h2>
+<p>Start by adding a placeholder object inside the <strong>Column</strong> that&#39;s the body of the landing page&#39;s <strong>Scaffold</strong> widget, right underneath the <strong>AppHeader</strong> widget. Just like before, do not worry about the error that shows - it just doesn&#39;t exist. We&#39;ll create it now. We do this so we don&#39;t forget it later.</p>
+<p class="image-container"><img alt="AppHeader" src="img/7393b4b3c0608ec8.png"></p>
+<p>Now, right underneath the <strong>AppHeader</strong> widget&#39;s class, add a new class. Name it <strong>AppSearch</strong>. Make it extend <strong>StatelessWidget</strong> like previously when we created the <strong>AppHeader</strong> widget. Also, like before, override its <strong>build</strong> method and add a placeholder <strong>Container</strong> widget, with a <strong>Text</strong> widget as a child, with the content &#34;<strong>search</strong>&#34;:</p>
+<p class="image-container"><img alt="AppSearch" src="img/29bc9a1bc8701504.png"></p>
+<aside class="special"><p>If you hit <strong>Run</strong> now on DartPad, you will see a label underneath the header that says &#34;header&#34; - this shows that the widget was mounted and things are working, as in the screenshot below:</p>
+</aside>
+<p class="image-container"><img alt="AppSearch" src="img/bbea9844f092294f.png"></p>
+<p>Let&#39;s continue.</p>
+<p>Just like in the <strong>AppHeader</strong>, we want to add some padding to the root container of this widget, so let&#39;s do just that. Add padding of 30px all around the <strong>Container</strong> widget, as follows:</p>
+<p class="image-container"><img alt="AppSearch" src="img/c9d4fc29fe3a9947.png"></p>
+<p>Replace the existing contents of the root Container widget in the <strong>AppSearch</strong> widget by a <strong>Column</strong> widget, with its *<strong>crossAxisAlignment</strong> property set to <strong>CrossAxisAlignment.start</strong>:</p>
+<p class="image-container"><img alt="AppSearch" src="img/9b9a7d7e93b63fa0.png"></p>
+<p>Add the first child of this Column, a <strong>Text</strong> widget with the content &#34;<strong>Discover</strong>&#34;, with a font size of 25px and a font weight of 900:</p>
+<p class="image-container"><img alt="AppSearch" src="img/f5330d9a301f32f0.png"></p>
+<p>We want some spacing between this label and the rest of the content, so we&#39;ll introduce it by adding a <strong>SizedBox</strong> with a height of 20px, right below the <strong>Text</strong> widget:</p>
+<p class="image-container"><img alt="AppSearch" src="img/562e6180f23c5b43.png"></p>
+<p>The third child in this <strong>Column</strong> widget will be a <strong>Row</strong> widget - we need it so we can lay down our widgets in a row fashion, with the first item in the Row (the search box) occupying most of its space, as in the illustration below:</p>
+<p class="image-container"><img alt="AppSearch" src="img/bcfec6ea3061e238.png"></p>
+<p>Let&#39;s build just that.</p>
+<h2 is-upgraded>Setting up the search box row</h2>
+<p>Right underneath the <strong>SizedBox</strong> we just added, add a <strong>Row</strong> widget; add the <strong>children</strong> property but make it empty for now:</p>
+<p class="image-container"><img alt="AppSearch" src="img/340fc17ef1dc26a5.png"></p>
+<p>This row will have two children: a search box container on the left, occupying most of the space, and a custom button on the right. If we want the search box container to occupy most of the space, we wrap it inside an <a href="https://api.flutter.dev/flutter/widgets/Expanded-class.html" target="_blank"><strong>Expanded</strong></a> widget, which tells its parent <strong>Row</strong> widget that the widget inside it will occupy most of its space; the rest of the widgets will only get the space allocated to them based on their dimensions.</p>
+<p>Let&#39;s work on it.</p>
+<aside class="special"><p>The next couple of code blocks will only zoom into the <strong>Row</strong> widget for brevity and real estate.</p>
+</aside>
+<p>Add an <strong>Expanded</strong> widget as the first child of this <strong>Row</strong>, wrapping a <strong>Container</strong> widget:</p>
+<p class="image-container"><img alt="AppSearch" src="img/14ca578c12811c92.png"></p>
+<p>Give this container the following properties:</p>
+<ul>
+<li>A fixed height of 50px</li>
+<li>Padding all around, 10px</li>
+<li>Add a <a href="https://api.flutter.dev/flutter/painting/BoxDecoration-class.html" target="_blank">BoxDecoration</a> decoration to allow us to set its color, as well as a border radius</li>
+<li>Set the decoration color of <strong>Colors.grey[200]</strong></li>
+<li>Set the border radius to <strong>BorderRadius.circular(10)</strong></li>
+</ul>
+<p class="image-container"><img alt="AppSearch" src="img/f22c786d0f63ef73.png"></p>
+<p>Inside of the container, now we will add the search icon, a label that says &#34;Search&#34;, and a bit of space in between them. In order to match our design, we will need another <strong>Row</strong> widget to lay them out horizontally inside this <strong>Container</strong>:</p>
+<p class="image-container"><img alt="AppSearch" src="img/792e86346a8f53e0.png"></p>
+<p>Add an <strong>Icon</strong> widget, with the <strong>Icons.search</strong> icon, color grey. The spacing will be taken care of by a <strong>SizedBox</strong> widget, width 10px. And last, a <strong>Text</strong> widget with the content &#34;Search&#34;, with color grey as well:</p>
+<p class="image-container"><img alt="AppSearch" src="img/a2aaf703cd264533.png"></p>
+<p>To wrap up this search bar layout, we will add the button located at the right hand side of the search box. We will build it using a <strong>Container</strong> widget wrapping an <strong>Icon</strong> widget.</p>
+<aside class="special"><p>You can create your own custom widgets (buttons, checkboxes, radiobuttons, etc.) using just the core widgets available (Container, Row, Column, Icon, Text, etc.).</p>
+</aside>
+<p>Inside the <strong>Row</strong> widget, underneath the <strong>Expanded</strong> widget holding the search box, let&#39;s add a <strong>Container</strong> widget with the following specs:</p>
+<ul>
+<li>Fixed width and height of 50px</li>
+<li>Left margin of 10px using <strong>EdgeInsets.only(left: 10)</strong></li>
+<li>BoxDecoration with color <strong>mainColor</strong>; border radius set to <strong>BorderRadius.circular(10)</strong></li>
+<li>Icon widget as a child, with icon set to <strong>Icons.tune</strong>, with a color of white.</li>
+</ul>
+<p class="image-container"><img alt="AppSearch" src="img/b6665ee19ee05deb.png"></p>
+<p>With that in place, let&#39;s take it for a spin. Clicking <strong>Run</strong> on DartPad should yield the following result:</p>
+<p class="image-container"><img alt="AppSearch" src="img/9e00f8f99f52b0b1.png"></p>
+<p>We nailed the search bar layout! Kudos to you for making it this far! We&#39;ll move onto a bit more advanced components and layouts in the next step. When you&#39;re ready, hit <strong>Next</strong>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creating App Mount ListView" duration="0">
+        <p>The next widget is one of the most prominent widgets on this app, as it displays multiple items in a list-view fashion, allowing the users to interact with and view several items at once. We&#39;re calling this widget <strong>AppMountListView</strong> as it displays the information of famous mounts in the world - the topic of this app.</p>
+<p class="image-container"><img alt="AppMountListView" src="img/285124dea8439912.png"></p>
+<p>The following illustration depicts the schematic view of the widget composition of the AppMountListView widget:</p>
+<p class="image-container"><img alt="AppMountListView" src="img/a5c8a76722e79d8.png"></p>
+<h2 is-upgraded>Adding Models that feed data to the AppMountListView</h2>
+<p>Before we start, you might be wondering where to get the images and the information about the famous mounts of the world. For that, we&#39;ll have to mock it up, and the data to be in a structured way. We&#39;ll create Dart models that will hold this mocked data.</p>
+<h3 is-upgraded>Creating A MountModel class</h3>
+<p>We need to hold the data corresponding to a single mount. For this, we will create a simple class called <strong>MountModel</strong>, which will hold the following information:</p>
+<ul>
+<li>A <strong>path</strong> property, type <strong><em>String</em></strong>, to hold the URL path to the picture of the mount</li>
+<li>A <strong>name</strong> property, type <strong><em>String</em></strong>, which will hold the name of the mount</li>
+<li>A <strong>description</strong> property, type <strong><em>String</em></strong>, which will hold the description of the mount</li>
+<li>A <strong>location</strong> property, also type <strong><em>String</em></strong>, which will have the name of the location of the mount.</li>
+</ul>
+<p>Write a class called <strong>MountModel</strong> at the end of this file, adding the properties above. Add a constructor for it and initialize the properties with some default empty values. At the end, your class should look like this:</p>
+<p class="image-container"><img alt="AppMountListView" src="img/527e07225538ca53.png"></p>
+<aside class="special"><p>It is best practice to group related entities within the same area of code; in our case, I&#39;m adding all pages within a section demarcated by the comment &#34;//—PAGES—&#34; and so on. I added a section called &#34;//—MODELS—&#34; and I&#39;m adding all my models under that section for easy finding and organization.</p>
+</aside>
+<h3 is-upgraded>Creating Mocked Data from the Created Model</h3>
+<p>Now that we have a way to structure the data we want to show (by creating a model class that will hold the values), we&#39;ll mock some data and store it in a collection so we can later feed it to our <strong><em>ListView</em></strong> widget.</p>
+<p>Create a list of <strong><em>MountModel</em></strong> items, called <strong>mountItems</strong>; make it <strong>final</strong> so we can assign default values right from the start. Populate it with the following values (you can add your own data, but for the sake of this workshop, you can grab the values provided below). Add this collection at the top of the file, in the <strong>GLOBAL VARIABLES SECTION</strong> (if you created a section for them), otherwise just add them at the top of the <strong>main</strong> method:</p>
+<aside class="special"><p>Feel free to copy / paste it so you can avoid lots of tedious typing of mocked data.</p>
+</aside>
+<pre><code language="language-flutter" class="language-flutter">final List&lt;MountModel&gt; mountItems = [
+  MountModel(
+      path:
+          &#39;https://sa.kapamilya.com/absnews/abscbnnews/media/2021/afp/01/17/20210116-mt-semeru-indonesia-ash-afp-s.jpg&#39;,
+      name: &#39;Mount Semeru&#39;,
+      description:
+          &#39;Semeru, or Mount Semeru, is an active volcano in East Java, Indonesia. It is located in the subduction zone, where the Indo-Australia plate subducts under the Eurasia plate. It is the highest mountain on the island of Java.&#39;,
+      location: &#39;East Java&#39;),
+  MountModel(
+      path:
+          &#39;https://media-cdn.tripadvisor.com/media/photo-s/04/a5/6f/ce/dsc-5622jpg.jpg&#39;,
+      name: &#39;Mount Merbaru&#39;,
+      description:
+          &#39;Mount Merbabu is a dormant stratovolcano in Central Java province on the Indonesian island of Java. The name Merbabu could be loosely translated as Mountain of Ash from the Javanese combined words; Meru means mountain and awu or abu means ash.&#39;,
+      location: &#39;Central Java&#39;),
+  MountModel(
+      path: &#39;https://cdn.dlmag.com/wp-content/uploads/2019/07/maunaloa1.jpg&#39;,
+      name: &#39;Mauna Loa&#39;,
+      description:
+          &#39;Mauna Loa is one of five volcanoes that form the Island of Hawaii in the U.S. state of Hawai in the Pacific Ocean. The largest subaerial volcano in both mass and volume, Mauna Loa has historically been considered the largest volcano on Earth, dwarfed only by Tamu Massif.&#39;,
+      location: &#39;Hawaii&#39;),
+  MountModel(
+      path:
+          &#39;https://cdn.images.express.co.uk/img/dynamic/78/590x/mount-vesuvius-1100807.jpg&#39;,
+      name: &#39;Mount Vesuvius&#39;,
+      description:
+          &#39;Mount Vesuvius is a somma-stratovolcano located on the Gulf of Naples in Campania, Italy, about 9 km east of Naples and a short distance from the shore. It is one of several volcanoes which form the Campanian volcanic arc.&#39;,
+      location: &#39;Italy&#39;),
+  MountModel(
+      path:
+          &#39;https://upload.wikimedia.org/wikipedia/commons/0/04/PopoAmeca2zoom.jpg&#39;,
+      name: &#39;Mount Popocatépetl&#39;,
+      description:
+          &#39;Popocatépetl is an active stratovolcano located in the states of Puebla, Morelos, and Mexico in central Mexico. It lies in the eastern half of the Trans-Mexican volcanic belt. At 5,426 m it is the second highest peak in Mexico, after Citlaltépetl at 5,636 m.&#39;,
+      location: &#39;Mexico&#39;)
+];
+</code></pre>
+<h3 is-upgraded>Creating the AppMountListView widget class / Adding Placeholder</h3>
+<p>As in the previous occasions, we first add a placeholder widget instance, then we create it. We&#39;ll do the same here.</p>
+<p>Back in the <strong>MountsApp</strong> widget, inside the <strong>Column</strong> inject, right underneath the <strong>AppSearch</strong> widget we created earlier, add an <strong>Expanded</strong> widget, which wraps our upcoming widget called <strong>AppMountListView</strong>.</p>
+<aside class="special"><p>As explained before, when we wrap widgets that are in a Column or Row inside an <strong>Expanded</strong> widget, is because they will occupy most of the real estate of the parent; in this case, we want the <strong>AppMountListView</strong> widget to take most of the space on this <strong>Column</strong> widget; then let the other sibling widgets fight for the remaining space.</p>
+</aside>
+<p class="image-container"><img alt="AppMountListView" src="img/3bae245d85b9b915.png"></p>
+<p>Now, go to the <strong>WIDGETS</strong> section (if you created one, otherwise let&#39;s work right under the <strong>AppSearch</strong> widget we created earlier) and add a new class called <strong>AppMountListView</strong> that extends StatelessWidget. As in the past, override the <strong>build</strong> method, add some dummy <strong>Container</strong> with a <strong>Text</strong> widget, just for testing. Add the text &#34;Mount List&#34; to the <strong>Text</strong> widget.</p>
+<p>Your class should look as follows:</p>
+<p class="image-container"><img alt="AppMountListView" src="img/9bac84252acc0ab0.png"></p>
+<p>If you hit the <strong>Run</strong> button on DartPad at this point in time, it should yield the following output in the preview panel on the right, which proves that things are hooked up and the widget is showing:</p>
+<p class="image-container"><img alt="AppMountListView" src="img/de08c7dffacb3585.png"></p>
+<p>Let&#39;s proceed.</p>
+<h2 is-upgraded>Creating the AppMountListView widget layout</h2>
+<p>Let&#39;s start by modifying the existing <strong>Container</strong> widget.</p>
+<p>Add a fixed height of 150px; we want to constrain the height of the <strong>ListView</strong> items that get rendered, so we&#39;ll limit the height at the ListView&#39;s parent level.</p>
+<p class="image-container"><img alt="AppMountListView" src="img/9909c6e54a46d7a3.png"></p>
+<p>Now, let&#39;s replace the existing child of the <strong>Container</strong> widget (the <strong>Text</strong> widget) by a <a href="https://api.flutter.dev/flutter/widgets/ListView-class.html" target="_blank"><strong>ListView</strong></a> widget, which provides a scrollable list of widgets arranged linearly.</p>
+<aside class="special"><p>The <strong>ListView</strong> widget is the most commonly used scrolling widget. For more info, visit this <a href="https://api.flutter.dev/flutter/widgets/ListView-class.html" target="_blank">link</a>.</p>
+</aside>
+<p>There are many ways in which you can instantiate a <strong>ListView</strong> widget, but we&#39;ll use a convenient constructore called <strong>builder</strong>, which creates a scrollable, linear array of widgets that are created on demand.</p>
+<aside class="special"><p>The <strong>ListView.builder</strong> constructor is appropriate for list views with a large (or infinite) number of children because the builder is called only for those children that are actually visible.</p>
+</aside>
+<p>Our <strong>ListView.builder</strong> constructor takes several parameters, but we&#39;ll only use three of them:</p>
+<ul>
+<li>scrollDirection: set the direction in which we want users to scroll through items. Default is vertical, but we want horizontal scrolling, hence setting its value to <strong>Axis.horizontal</strong>.</li>
+<li>itemCount: the number of items that the <strong>ListView</strong> will render for us. Notice we&#39;re using the length of the <strong>mountItems</strong> collection we created previously.</li>
+<li>itemBuilder: callback that gets triggered for as many items you set in <strong>itemCount</strong> (one for every item in the <strong>mountItems</strong> collection); returns widgets created on demand as they become visible, for efficiency.</li>
+</ul>
+<p class="image-container"><img alt="AppMountListView" src="img/3bf2e85874ebd905.png"></p>
+<aside class="warning"><p>Notice we are returning an empty <strong>Container</strong> widget in the body of the <strong>itemBuilder</strong> callback; we&#39;ll build a widget for each of the items in the <strong>mountItems</strong> collection, using the <strong><em>index</em></strong> property provided to the <strong>itemBuilder</strong> callback.</p>
+</aside>
+<p>Now, for as many items that are visible in the <strong>ListView</strong> widget&#39;s viewport, it invokes the <strong>itemBuilder</strong> callback, passing the <strong><em>context</em></strong> and the <strong><em>index</em></strong> corresponding to the <strong><em>ListView</em></strong> item in question. We&#39;ll use those parameters to build each widget based on the data provided in the <strong>mountItems</strong> collection.</p>
+<p>Let&#39;s give this <strong>Container</strong> more definition.</p>
+<p>First, fetch the data from the <strong>mountItems</strong> collection corresponding to the <strong><em>index</em></strong> provided in the *<strong>itemBuilder</strong> callback, as follows:</p>
+<p class="image-container"><img alt="AppMountListView" src="img/df4ff631ac96af9d.png"></p>
+<p>We&#39;ll use this <strong>currentMount</strong> local variable to hold on to the current mount model information in the current iteration.</p>
+<p>For the Container, let&#39;s start setting up some properties:</p>
+<ul>
+<li>Set its <strong>alignment</strong> property to <strong>Alignment.bottomLeft</strong> so child widgets align themselves accordingly</li>
+<li>Set both padding and margin (all around) to 20px and 10px respectively</li>
+<li>Fixed dimensions of width and height, 150px each</li>
+</ul>
+<p class="image-container"><img alt="AppMountListView" src="img/c07945536446cc0a.png"></p>
+<p>We&#39;ll set the image as a background image to this <strong>Container</strong> widget. To accomplish this, we set the <strong>image</strong> property (type <strong>DecorationImage</strong>) of the container&#39;s <strong>decoration</strong> property. We&#39;ll use a <strong>NetworkImage</strong> widget, passing the path of the image in the current iteration (available via the <strong>currentMount</strong> local variable) and using its <strong>path</strong> property.</p>
+<p>While we&#39;re at it, we&#39;ll set a border radius to <strong>BorderRadius.circular(15)</strong> to give some soft round edges all around it:</p>
+<p class="image-container"><img alt="AppMountListView" src="img/de2aa4fbe29f61e3.png"></p>
+<p>If you run the code as-is, by hitting <strong>Run</strong> on DartPad, this would be the outcome:</p>
+<p class="image-container"><img alt="AppMountListView" src="img/6a3666e82586bce8.png"></p>
+<p>The images show, and they stretch all the way down the height of the page, due to the <strong>Expanded</strong> widget wrapping the ListView and taking up most of the <strong>Column</strong> widget space.</p>
+<p>Let&#39;s proceed now and add content to this container.</p>
+<p>Add a <strong>Column</strong> widget as the child of the <strong>Container</strong> being returned. Add <strong><em>mainAxisAlignment</em></strong> set to <strong>MainAxisAlignment.end</strong>, as well as <strong><em>crossAxisAlignment</em></strong> set to <strong>CrossAxisAlignment.start</strong>, so the items get aligned at the bottom of the column and at the left, respectively:</p>
+<p class="image-container"><img alt="AppMountListView" src="img/70abb695f889a151.png"></p>
+<p>As children of the newly added <strong>Column</strong> widget, add two <strong>Text</strong> widgets. and tap into the data provided in the <strong>currentMount</strong> property to display the <strong><em>name</em></strong> and the <strong><em>location</em></strong>. For both <strong>name</strong> and <strong>location</strong>, set their color to <strong>Colors.white</strong>, but for <strong>name</strong> only, set its *<strong>fontWeight</strong> property to <strong>FontWeight.bold</strong> to make it more prominent:</p>
+<p class="image-container"><img alt="AppMountListView" src="img/3508e056a4e4f9c9.png"></p>
+<p>If you run the app as it stands right now, you should see that the labels display at the bottom of the container, on top of the image, as shown below:</p>
+<p class="image-container"><img alt="AppMountListView" src="img/5d394093392b6979.png"></p>
+<p>And that&#39;s about it! Our <strong>AppMountListView</strong> widget is in place and fully functioning, with the help of mocked data powering this widget. Give yourself a pat on the back for accomplishing that!</p>
+<p>Now, we&#39;re ready for the next widget in line, so hit the <strong>Next</strong> button to proceed.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creating App Category List" duration="0">
+        <p>The next widget in line is the <strong>AppCategoryList</strong> widget, which displays a list of categories, much in the same way as the mount pictures - using a horizontally scrollable <strong>ListView</strong> widget.</p>
+<h3 is-upgraded>App Category List</h3>
+<p class="image-container"><img alt="AppCategoryList" src="img/d3f05908a167272a.png"></p>
+<p>The following is a schematic view of what we&#39;ll be building as far as this widget goes:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/e62725110d6fdbee.png"></p>
+<h2 is-upgraded>Adding Models that feed data to the AppCategoryList</h2>
+<p>We&#39;re gonna follow exactly the same approach as in the <strong>AppMountListView</strong> - we&#39;ll mock up the data for the categories, and create Dart models that will hold this mocked data.</p>
+<h3 is-upgraded>Creating A CategoryModel class</h3>
+<p>We need to hold the data corresponding to a single category. For this, we will create a simple class called <strong>CategoryModel</strong>, which will hold the following information:</p>
+<ul>
+<li>A <strong>category</strong> property, type <strong><em>String</em></strong>, to hold the category name</li>
+<li>An <strong>icon</strong> property, type <strong><em>IconData</em></strong> (we&#39;ll make it nullable), which will hold the icon of the corresponding category. We set it nullable by default so we don&#39;t have to be forced to assign a default value and can be null initially. More on Flutter null-safety <a href="https://flutter.dev/docs/null-safety" target="_blank">here</a>.</li>
+</ul>
+<p>Write a class called <strong>CategoryModel</strong> at the end of this file, adding the properties above. Add a constructor for it and initialize the properties with some default empty values.</p>
+<aside class="special"><p>You may have already created a section for your models in this file (demarcated by a comment &#34;//—–MODELS—–&#34;); if you did, then add this model under that section, otherwise, at the end of the file is fine.</p>
+</aside>
+<p>At the end, your class should look like this:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/137d65422c8b6aef.png"></p>
+<h3 is-upgraded>Creating Mocked Data from the Category Model</h3>
+<p>Now that we have a way to structure the data we want to show (by creating a model class that will hold the values), we&#39;ll mock some data and store it in a collection so we can later feed it to our <strong><em>ListView</em></strong> widget inside the <strong>AppCategoryList</strong> widget.</p>
+<p>Create a list of <strong><em>CategoryModel</em></strong> items, called <strong>categories</strong>; make it <strong>final</strong> so we can assign default values right from the start. Populate it with the following values (you can add your own data, but for the sake of this workshop, you can grab the values provided below).</p>
+<p>Add this collection at the top of the file, in the <strong>GLOBAL VARIABLES SECTION</strong> (if you created a section for them), otherwise just add them at the top of the <strong>main</strong> method:</p>
+<aside class="special"><p>Feel free to copy / paste it so you can avoid lots of tedious typing of mocked data.</p>
+</aside>
+<pre><code language="language-flutter" class="language-flutter">final List&lt;CategoryModel&gt; categories = [
+  CategoryModel(category: &#39;Mountain&#39;, icon: Icons.terrain),
+  CategoryModel(category: &#39;Forest&#39;, icon: Icons.park),
+  CategoryModel(category: &#39;Beach&#39;, icon: Icons.beach_access),
+  CategoryModel(category: &#39;Hiking&#39;, icon: Icons.directions_walk)
+];
+</code></pre>
+<h3 is-upgraded>Creating the AppCategoryList widget class / Adding Placeholder</h3>
+<p>As in the previous occasions, we first add a placeholder widget instance, then we create it. We&#39;ll do the same here.</p>
+<p>Back in the <strong>MountsApp</strong> widget, inside the <strong>Column</strong> inject, right underneath the <strong>Expanded</strong> widget that wraps the <strong>AppMountListView</strong> widget we created earlier, add our upcoming widget <strong>AppCategoryList</strong>.</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/8bb686704356c4ba.png"></p>
+<p>Now, go to the <strong>WIDGETS</strong> section (if you created one, otherwise let&#39;s work right under the <strong>AppMountListView</strong> widget we created earlier) and add a new class called <strong>AppCategoryList</strong> that extends StatelessWidget. As in the past, override the <strong>build</strong> method, add some dummy <strong>Container</strong> with a <strong>Text</strong> widget, just for testing. Add the text &#34;Categories&#34; to the <strong>Text</strong> widget.</p>
+<p>Your class should look as follows:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/1f4d771d4c4324cb.png"></p>
+<p>If you hit the <strong>Run</strong> button on DartPad at this point in time, it should yield the following output in the preview panel on the right (see the text &#34;Categories&#34; at the bottom), which proves that things are hooked up and the widget is showing:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/44b2a5899ace5d40.png"></p>
+<p>Let&#39;s proceed.</p>
+<h2 is-upgraded>Creating the AppCategoryList widget layout</h2>
+<p>Let&#39;s start by modifying the existing <strong>Container</strong> widget. This widget will follow pretty much the same layout as the <strong>AppMountListView</strong>.</p>
+<p>We&#39;ll start by replacing the contents of the existing <strong>Container</strong> widget (the <strong>Text</strong> widget) by a <strong>Column</strong> widget; while you&#39;re at it, add two <strong>Container</strong> widgets as its children:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/44ef4443fb774aad.png"></p>
+<h3 is-upgraded>Creating the AppCategoryList header row</h3>
+<p>Now, let&#39;s focus on the top row for now. This is a zoomed-in view of the top container&#39;s schematic view. This is what we&#39;ll build:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/9ade2e5edc97215c.png"></p>
+<p>Just like in the illustration above, for the top <strong>Container</strong> widget, add some padding (20px all around) using <strong>EdgeInsets.all(20)</strong> as well as adding a <strong>Row</strong> widget as its child:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/333d93f7fea6aa50.png"></p>
+<p>We want to place two <strong>Text</strong> widgets inside, spreaded apart.</p>
+<p>For this, set the *<strong>mainAxisAlignment</strong> of the <strong>Row</strong> widget to <strong>MainAxisAlignment.spaceBetween</strong>.</p>
+<p>Add two <strong>Text</strong> widgets; first one with the text &#34;Categories&#34;, color black and bold. The second one, font size 12px, use the <strong>mainColor</strong> for the text color, and bold as well:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/758ea1fd73d45f78.png"></p>
+<p>If you run it now on DartPad by hitting <strong>Run</strong>, you should see the category header showing:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/d2f31c4543507fd3.png"></p>
+<p>And with that, we&#39;re done with the header row. Let&#39;s do the row that holds the <strong>ListView</strong> displaying the categories.</p>
+<h3 is-upgraded>Creating the Categories ListView row</h3>
+<p>Now we&#39;ll focus on the bottom row, by starting to look at the schematic view for it:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/6391adecab11636c.png"></p>
+<p>With that, let&#39;s proceed building the structure.</p>
+<p>For the second <strong>Container</strong> widget representing the second row, add a fixed height of 100px, plus margin of 10px but only on the left side:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/3e05764e2d0e70e9.png"></p>
+<p>As the child of this <strong>Container</strong> widget, add a <strong>ListView</strong> widget, and we&#39;ll use the same <strong>builder</strong> constructor out of the <strong>ListView</strong> to generate items for it on demand, based on how many categories we have available. We&#39;ll build the list providing values to its parameters as follows:</p>
+<ul>
+<li>For <strong>scrollDirection</strong>, set it to <strong>Axis.horizontal</strong> to enable horizontal scrolling</li>
+<li>For the <strong>itemCount</strong>, set it to the <strong>categories.length</strong> value</li>
+<li>For the <strong>itemBuilder</strong> callback (which will get triggered for each of the categories that are visible in the viewport), we&#39;ll add it and return a placeholder <strong>Container</strong> widget, which we&#39;ll flesh out in a minute.</li>
+</ul>
+<p>Your code should look as follows:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/1cbb92926a16ba1b.png"></p>
+<p>Now let&#39;s build up on the returning <strong>Container</strong> widget from the <strong>itemBuilder</strong> callback.</p>
+<aside class="special"><p>From this point forward, the code will focus on the <strong>itemBuilder</strong> callback for coding space and brevity</p>
+</aside>
+<p>Inside the <strong>itemBuilder</strong> method of the <strong>ListView.builder</strong> constructor, we currently have an empty <strong>Container</strong> widget. We will populate this container with the data we get out of the <strong>categories</strong> collection corresponding to the <strong>index</strong> passed to this callback.</p>
+<p>Create a local variable called <strong>currentCategory</strong> right above this <strong>Container</strong>, which will correspond to the category of the current iteration:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/558403f53582299b.png"></p>
+<p>Great. Now let&#39;s build up on the Container being return by hydrating some of its properties as follows:</p>
+<ul>
+<li>Fixed width of 100px</li>
+<li>Margins only top and right, 10px</li>
+<li>Padding all around of 10px</li>
+<li><strong>BoxDecoration</strong> decoration, so we can add a border all around, with a width of 2px, light grey</li>
+<li>Border radius of 10px all around the container</li>
+</ul>
+<p>Your code should look like this:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/2cb912cc728bc545.png"></p>
+<p>As the child of this <strong>Container</strong>, let&#39;s add a <strong>Column</strong> widget (since we want to align the items vertically), plus set its <strong>mainAxisAlignment</strong> property to <strong>MainAxisAlignment.center</strong> so they are vertically centered:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/12c83f88260b7478.png"></p>
+<p>This <strong>Column</strong> widget will hold two items: an <strong>Icon</strong> widget and a <strong>Text</strong> widget, which will be fed from the <strong>currentCategory</strong> local variable we set up earlier.</p>
+<p>Let&#39;s add these two elements as children of the <strong>Column</strong>; get the icon from the <strong>currentCategory.icon</strong> property and set its color to <strong>mainColor</strong>; get the category name from the <strong>currentCaregory.category</strong>, set its font size to 12px and its font weight to <strong>bold</strong>, as follows:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/61f78fcffc207501.png"></p>
+<p>As a recap, for every item in the <strong>categories</strong> collection, the <strong>itemBuilder</strong> callback of the <strong>ListView</strong> will trigger, render a <strong>Container</strong> widget with the values provided, and display them to the user in a horizontally scrollable list.</p>
+<p>Let&#39;s hit <strong>Run</strong> in DartPad to see what we&#39;ve accomplished so far, and this is what we get:</p>
+<p class="image-container"><img alt="AppCategoryList" src="img/f76f4bf4e71211ee.png"></p>
+<p>Looking good! Loved how it came out, and how the application is taking shape. Now we&#39;ll proceed with the last widget for this page: the bottom bar widget. Click <strong>Next</strong> to proceed to the next step. See you there!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creating the App Bottom Bar" duration="0">
+        <aside class="special"><p>For this widget, we won&#39;t be hooking up a tab navigation strategy to it; this is ONLY dealing with the layout of a custom bottom bar. In future labs, we&#39;ll be dealing with custom tab navigation.</p>
+</aside>
+<p>We&#39;re ready to tackle the layout of the last widget of the <strong>MountsApp</strong> page widget, which we&#39;re calling the <strong>AppBottomBar</strong>, which is nothing more than a custom bar that can be used as tab navigation for this page, and switch between different views based on what the user has clicked. We will only do the layout and not perform any navigation, for the sake of this tutorial that deals with layout building.</p>
+<h2 is-upgraded>App Bottom Bar Widget</h2>
+<p class="image-container"><img alt="AppBottomBar" src="img/f44dcb58ad0d9b4.png"></p>
+<p>For this widget, we&#39;ll be maintaining state within itself, hence this widget will inherit from <strong>StatefulWidget</strong>. Every time a user clicks on one of the bottom bar options, the widget&#39;s state changes - the state of which one is selected - which triggers a rebuild, and renders accordingly. That&#39;s in essence how StatefulWidgets work. More on <strong><em>StatefulWidgets </em></strong><a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html" target="_blank">here</a>.</p>
+<p>Let&#39;s show the schematic view of this widget, so we&#39;ll have a concrete idea of its composition and how we&#39;ll build it:</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/35d2aaee41edf9af.png"></p>
+<h3 is-upgraded>Creating the AppBottomBar widget class / Adding Placeholder</h3>
+<p>As in the previous occasions, we first add a placeholder widget instance, then we create it. We&#39;ll do the same here.</p>
+<p>Back in the <strong>MountsApp</strong> widget, inside the <strong>Column</strong> inject, right underneath the <strong>AppCategoryList</strong> widget we created earlier, add our upcoming widget <strong>AppBottomBar</strong>.</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/ecfdc02b3a0a5030.png"></p>
+<p>Now, go to the <strong>WIDGETS</strong> section (if you created one, otherwise let&#39;s work right under the <strong>AppCategoryList</strong> widget we created earlier). Creating a <strong><em>StatefulWidget</em></strong> involves a two-step process.</p>
+<p>A widget that maintains its state and extending <strong>StatefulWidget</strong> is composed of two classes, the widget class that extends <strong>StatefulWidget</strong> and the <strong>State</strong> class.</p>
+<p>First step is creating a new class that extends <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html" target="_blank"><strong>StatefulWidget</strong></a> (in our case, a class called <strong>AppBottomBar</strong>).</p>
+<p>In this class, you will override a special method called <strong>createState</strong>, which instantiates the companion <strong>State</strong> class, which by convention, it&#39;s usually named <strong>&lt;NAME_OF_WIDGET&gt;State</strong> (i.e. <strong><em>AppBottomBarState</em></strong> - we haven&#39;t created it yet, but we will in a minute):</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/124690e4abe02165.png"></p>
+<p>Second step is creating the class that will hold the state for this widget, which we&#39;ll call <strong>AppBottomBarState</strong> - this is the one that contains the build method, and every time the state changes, the build method gets triggered, rebuilding the widget, keeping it in sync with the data. This class extends <a href="https://api.flutter.dev/flutter/widgets/State-class.html" target="_blank"><strong>State</strong></a> and must be of type of its corresponding StatefulWidget (i.e. State&lt;AppBottomBar&gt;) so as to establish the relationship between the widget and its state.</p>
+<p>As in the past, override the <strong>build</strong> method, add some dummy <strong>Container</strong> with a <strong>Text</strong> widget, just for testing. Add the text &#34;Bottom Bar&#34; to the <strong>Text</strong> widget.</p>
+<p>Right off the bat, the <strong>State</strong> class looks pretty much like a <strong>StatefulWidget</strong> class, with an overridden <strong>build</strong> method - we&#39;ll see down below what makes it so special.</p>
+<p>Your class(es) should look as follows:</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/24ed64e45234fdb9.png"></p>
+<p>If you hit the <strong>Run</strong> button on DartPad at this point in time, it should yield the following output in the preview panel on the right (see the text &#34;Bottom Bar&#34; at the bottom), which proves that things are hooked up and the widget is showing:</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/5d54a770bb2fbb49.png"></p>
+<p>Let&#39;s dig in!</p>
+<h2 is-upgraded>Creating a Model for the Bottom Bar Item Data</h2>
+<p>Before we proceed further, we want to create a model that holds the data corresponding to each one of the bottom bar items (i.e. we want to show an icon, a label, a flag whether it is selected or not, etc.). This model will also hold information about the state we&#39;re keeping track of - which of the selected bottom bar items is selected.</p>
+<p>Let&#39;s create a model class called <strong>AppBottomBarItem</strong>, which will be just a regular class that will hold the following properties:</p>
+<ul>
+<li><strong>icon</strong>: type <strong><em>IconData</em></strong>, represents the icon to show for each item in the bottom bar</li>
+<li><strong>isSelected</strong>: type <strong><em>bool</em></strong>, holds the value of whether this is the currently selected item in the bottom bar</li>
+<li><strong>label</strong>: type <strong><em>String</em></strong>, holds the label to display when the item is selected</li>
+</ul>
+<aside class="special"><p>You may have already created a section for your models in this file (demarcated by a comment &#34;//—–MODELS—–&#34;); if you did, then add this model under that section, otherwise, at the end of the file is fine.</p>
+</aside>
+<p>Your <strong>AppBottomBarItem</strong> model class should look as follows:</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/95e0a919560c829e.png"></p>
+<p>Now that we have a way to represent each of the bottom bar items, let&#39;s create a collection of these items inside of the State so we can keep track of which one is selected.</p>
+<p>Proceed to the <strong>AppBottomBarState</strong> class; inside of the class, above the build method, create a property called <strong>barItems</strong>; make it a <strong>List</strong> of <strong>AppBottomBarItem</strong> models, and initialize it with an empty array, as follows:</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/129fbcb52d8f71f1.png"></p>
+<p>Now let&#39;s populate it with some mocked data:</p>
+<aside class="special"><p>Feel free to copy / paste it in order to avoid tedious typing!</p>
+</aside>
+<pre><code language="language-flutter" class="language-flutter">// populate the list of AppBottomBarItems
+
+List&lt;AppBottomBarItem&gt; barItems = [
+    AppBottomBarItem(icon: Icons.home, label: &#39;Home&#39;, isSelected: true),
+    AppBottomBarItem(icon: Icons.explore, label: &#39;Explore&#39;, isSelected: false),
+    AppBottomBarItem(icon: Icons.turned_in_not, label: &#39;Tag&#39;, isSelected: false),
+    AppBottomBarItem(icon: Icons.person_outline,label: &#39;Profile&#39;, isSelected: false)
+];
+
+</code></pre>
+<p>Notice that the top item inserted has the <strong>isSelected</strong> property as <strong>true</strong> since we want the first item to display as selected by default:</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/3a2ff415a624d596.png"></p>
+<p>Nice. Let&#39;s build up on that existing <strong>Container</strong> widget returned by the <strong>build</strong> method.</p>
+<p>Let&#39;s set some of its properties to the following values:</p>
+<ul>
+<li>margin: 20px only on the top</li>
+<li>padding: 20px all around</li>
+<li>decoration: use a <strong>BoxDecoration</strong> object and set the following properties:  <ul>
+<li>color: set it to white</li>
+<li>boxShadow: add an array with a single <strong>BoxShadow</strong> element; set its <strong><em>color</em></strong> to <strong>black</strong> with a 0.1 opacity, <strong><em>blurRadius</em></strong> of 10, and set its *<strong>offset</strong> to <strong>Offset.zero</strong>.</li>
+</ul>
+</li>
+</ul>
+<p class="image-container"><img alt="AppBottomBar" src="img/5f225342bfc71b76.png"></p>
+<aside class="special"><p>From this point forward, we&#39;ll be contentrating only on the <strong>Container</strong> object and showing you what&#39;s inside that block of code as we build it, for brevity and space.</p>
+</aside>
+<p>Replace the contents of the <strong>Container</strong> widget (the <strong>Text</strong> widget) by a <strong>Row</strong> widget (the items in the bottom bar will be laid out horizontally, evenly spaced out).</p>
+<p>Add a <strong>Row</strong> widget, and set its <strong>mainAxisAlignment</strong> property to <strong>MainAxisAlignment.spaceAround</strong> - this will make its children space themselves accordingly, with equal amount of space distributed among them.</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/48da3e883ed4d76.png"></p>
+<p>We&#39;ll generate the children of the <strong>Row</strong> widget as a list, based on the values available in the collection called <strong>barItems</strong> created earlier. We&#39;ll loop through these items and generate a corresponding widget from each of the items available.</p>
+<p>The factory method available in the <strong>List</strong> class called <strong>generate</strong> will simplify the looping throught the items in the <strong>barItems</strong> collection. This factory method takes two parameters: the length of the list (provided by <strong>barItems.length</strong>) and a callback, which will be executed for each of the items in the collection, and will pass an index into the callback - the index corresponding to each item in the collection:</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/fc657b1e6f582e92.png"></p>
+<p>Now, for each of the items in the <strong>barItems</strong> collection, we will build a structure according to whether they are selected or not. If they are selected, we&#39;ll build a widget structure to denote they are selected, and a separate one otherwise. This widget tree logic will be driven by the <strong>isSelected</strong> flag.</p>
+<p>Let&#39;s see the schematic view before we tackle it:</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/8bb0158bc6169e45.png"></p>
+<p>Now let&#39;s tackle the first portion of the widget structure: when a bar item is selected.</p>
+<p>First, grab the current bar item from the iteration (using the <strong>index</strong> supplied to the callback method) and grab the corresponding item from the <strong>barItems</strong> collection using this index:</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/83d903b36fb2d743.png"></p>
+<p>We&#39;ll also create a local variable called <strong>barItemWidget</strong> to hold the resulting widget to render based on that logic:</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/24a9ac836903cebc.png"></p>
+<h3 is-upgraded>Creating the structure for when isSelected == true</h3>
+<p>As stated before, if the <strong>currentBarItem.isSelected</strong> is <strong>true</strong>, we&#39;ll create a specific structure, and store it on our <strong>barItemWidget</strong> variable. The first structure will consist of a <strong>Container</strong> widget with the following properties set as follows:</p>
+<ul>
+<li>padding: 15px left, 5px top, 15 px right</li>
+<li>decoration: using a <strong>BoxDecoration</strong> object with the color set to <strong>mainColor</strong> and a border radius of 20px all around, to give it that pill look:</li>
+</ul>
+<p class="image-container"><img alt="AppBottomBar" src="img/8037f169b7e62d6d.png"></p>
+<aside class="special"><p>From this point on, the code will concentrate on the <strong>List.generate</strong> callback method only, for brevity and space</p>
+</aside>
+<p>The child of this container will be an icon and a label, separated by some space, so we&#39;ll resort to a <strong>Row</strong> widget to lay these out, so add a <strong>Row</strong> widget as a child of this <strong>Container</strong>.</p>
+<p>Add an <strong>Icon</strong> widget, and using the <strong>currentBarItem</strong> property to fetch the <strong>icon</strong> property out of it, setting it to a white color. Add space next to it by using a <strong>SizedBox</strong> of 5px width, and then a <strong>Text</strong> widget, feeding into it the <strong>currentBarItem.label</strong> to show the name, with a color of white as well.</p>
+<p>Your <strong>Container</strong>&#39;s child (the <strong>Row</strong> widget) should look like this afterwards:</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/dcfdacc96a122ce8.png"></p>
+<p>We&#39;re all set with the structure for when the item is selected. Now let&#39;s do for the normal / non-selected visual state.</p>
+<h3 is-upgraded>Create the structure for when isSelected == false</h3>
+<p>We&#39;ll add the missing <strong>else</strong> clause that should handle the case when the <strong>isSelected</strong> is <strong>false</strong>, in which all we want to add is a simple IconButton widget, with its <strong>icon</strong> property set to the icon supplied in the <strong>currentBarItem.icon</strong>, with color grey, and a callback hooked up to its <strong>onPressed</strong> event:</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/16fbb90850ec2f2a.png"></p>
+<h3 is-upgraded>Triggering the widget to rebuild by calling <strong>setState</strong></h3>
+<p>When a user taps on one of the bar items not selected, it will change its flag to <strong>isSelected == true</strong>; this is an indication that this widget&#39;s state has changed and that we want the widget visualization to sync with the data. The way to trigger a widget rebuild is by wrapping this action inside a method supplied by the <strong>State</strong> class called <strong>setState</strong>. By performing the desired change (flipping the value from <strong>false</strong> to <strong>true</strong> in the corresponding model) will trigger a set of events:</p>
+<ul>
+<li>The value in the model changes from true to false</li>
+<li>The widget gets notified that its user interface is not in sync with the data via the <strong>setState</strong> method</li>
+<li>A widget rebuild kicks off, re-rendering its structure using the newly updated data</li>
+<li>The widget displays the updated user interface in sync with the data</li>
+</ul>
+<p>Inside the <strong>onPressed()</strong> event, call the <strong>setState()</strong> method, and inside of this method, loop through all <strong>barItems</strong> items, only marking as selected the one that matches with the <strong>currentBarItem</strong> - the one in the current iteration:</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/572202805cec22b2.png"></p>
+<p>Every time we press on one of the non-selected items, <strong>setState</strong> gets called, flag is reset for one of the items, widget rebuilds, and so on.</p>
+<p>Finally, return the resulting widget (<strong><em>barItemWidget</em></strong>) at the end of this callback method, and you should be all set.</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/30936231ba9241d2.png"></p>
+<p>If you take it for a spin on DartPad and hit <strong>Run</strong>, you&#39;ll notice the newly minted <strong>AppBottomBar</strong> widget. Click on the items on the bar and you&#39;ll see them change state accordingly, and the state contained only within this widget in a very efficient manner:</p>
+<p class="image-container"><img alt="AppBottomBar" src="img/30936231ba9241d2.png"></p>
+<p>Also notice the full-fledged <strong>MountsApp</strong> page widget, with all its widgets in place.</p>
+<aside class="warning"><p>If you want to test the whole workflow, remember to reset the <strong>SplashPage</strong> to the <strong>MaterialApp</strong>&#39;s <strong>home</strong> property.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Wrap-up" duration="0">
+        <p>And with that, we&#39;re done with the second codelab of this workshop, where we accomplished the following:</p>
+<ul>
+<li>Created the Landing Page</li>
+<li>Created the individual widgets that make up this page widget</li>
+<li>Created models and mocked data that fed these widgets</li>
+<li>Dive into building UI layouts in Flutter using just core widgets</li>
+<li>Delved into StatefulWidgets and how they changed state and trigger widget rebuilds</li>
+</ul>
+<p>In the next and final codelab, we&#39;ll flesh out the details page widget and continue building more widgets, diving more into layouts, navigation and passing data between widgets. See you there!</p>
+<h3 is-upgraded>Please don&#39;t forget to follow me on social media:</h3>
+<ul>
+<li>On Twitter (<a href="https://www.twitter.com/drcoderz" target="_blank">@drcoderz</a>)</li>
+<li>On YouTube (<a href="https://www.youtube.com/channel/UCKsp3r1ERjCpKJtD2n5WtPg" target="_blank">Roman Just Codes</a>)</li>
+<li>On My <a href="https://romanjustcodes.web.app/#/home" target="_blank">Personal Portfolio</a></li>
+<li>On <a href="https://medium.com/@romanejaquez" target="_blank">Medium</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Complete Code" duration="0">
+        <p>In case you fell behind on this codelab, below is the whole code for this codelab in a way you can copy / paste directly into DartPad:</p>
+<pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
+
+//-----GLOBAL VARIABLES-----
+final Color mainColor = Color(0xFFFF5656);
+
+final List&lt;MountModel&gt; mountItems = [
+  MountModel(
+      path:
+          &#39;https://sa.kapamilya.com/absnews/abscbnnews/media/2021/afp/01/17/20210116-mt-semeru-indonesia-ash-afp-s.jpg&#39;,
+      name: &#39;Mount Semeru&#39;,
+      description:
+          &#39;Semeru, or Mount Semeru, is an active volcano in East Java, Indonesia. It is located in the subduction zone, where the Indo-Australia plate subducts under the Eurasia plate. It is the highest mountain on the island of Java.&#39;,
+      location: &#39;East Java&#39;),
+  MountModel(
+      path:
+          &#39;https://media-cdn.tripadvisor.com/media/photo-s/04/a5/6f/ce/dsc-5622jpg.jpg&#39;,
+      name: &#39;Mount Merbaru&#39;,
+      description:
+          &#39;Mount Merbabu is a dormant stratovolcano in Central Java province on the Indonesian island of Java. The name Merbabu could be loosely translated as Mountain of Ash from the Javanese combined words; Meru means mountain and awu or abu means ash.&#39;,
+      location: &#39;Central Java&#39;),
+  MountModel(
+      path: &#39;https://cdn.dlmag.com/wp-content/uploads/2019/07/maunaloa1.jpg&#39;,
+      name: &#39;Mauna Loa&#39;,
+      description:
+          &#39;Mauna Loa is one of five volcanoes that form the Island of Hawaii in the U.S. state of Hawai in the Pacific Ocean. The largest subaerial volcano in both mass and volume, Mauna Loa has historically been considered the largest volcano on Earth, dwarfed only by Tamu Massif.&#39;,
+      location: &#39;Hawaii&#39;),
+  MountModel(
+      path:
+          &#39;https://cdn.images.express.co.uk/img/dynamic/78/590x/mount-vesuvius-1100807.jpg&#39;,
+      name: &#39;Mount Vesuvius&#39;,
+      description:
+          &#39;Mount Vesuvius is a somma-stratovolcano located on the Gulf of Naples in Campania, Italy, about 9 km east of Naples and a short distance from the shore. It is one of several volcanoes which form the Campanian volcanic arc.&#39;,
+      location: &#39;Italy&#39;),
+  MountModel(
+      path:
+          &#39;https://upload.wikimedia.org/wikipedia/commons/0/04/PopoAmeca2zoom.jpg&#39;,
+      name: &#39;Mount Popocatépetl&#39;,
+      description:
+          &#39;Popocatépetl is an active stratovolcano located in the states of Puebla, Morelos, and Mexico in central Mexico. It lies in the eastern half of the Trans-Mexican volcanic belt. At 5,426 m it is the second highest peak in Mexico, after Citlaltépetl at 5,636 m.&#39;,
+      location: &#39;Mexico&#39;)
+];
+
+final List&lt;CategoryModel&gt; categories = [
+  CategoryModel(category: &#39;Mountain&#39;, icon: Icons.terrain),
+  CategoryModel(category: &#39;Forest&#39;, icon: Icons.park),
+  CategoryModel(category: &#39;Beach&#39;, icon: Icons.beach_access),
+  CategoryModel(category: &#39;Hiking&#39;, icon: Icons.directions_walk)
+];
+
+//-----MAIN METHOD-----
+void main() {
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false, 
+      home: MountsApp() // SplashPage()
+    )
+  );
+}
+
+//-----PAGES-----
+// splash page
+class SplashPage extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) =&gt; MountsApp()));
+    });
+
+    return Container(
+      color: mainColor,
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Icon(Icons.terrain, color: Colors.white, size: 90),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              margin: EdgeInsets.only(bottom: 80),
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation&lt;Color&gt;(Colors.white)
+              )
+            )
+          )
+        ],
+      )
+    );
+  }
+}
+
+// landing page
+class MountsApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Center(
+          child: Icon(
+            Icons.terrain, 
+            color: mainColor, 
+            size: 40
+          )
+        ),
+        actions: [
+          SizedBox(width: 40, height: 40)
+        ],
+        iconTheme: IconThemeData(color: mainColor)
+      ),
+      drawer: Drawer(
+        child: Container(
+          padding: EdgeInsets.all(30),
+          color: mainColor,
+          alignment: Alignment.bottomLeft,
+          child: Icon(Icons.terrain, color: Colors.white, size: 80)
+        )
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppHeader(),
+          AppSearch(),
+          Expanded(
+            child: AppMountListView()
+          ),
+          AppCategoryList(),
+          AppBottomBar()
+        ],
+      )
+    );
+  }
+}
+
+//-----WIDGETS-----
+
+class AppHeader extends StatelessWidget {  
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 30, top: 30, right: 30),
+      child: Row(
+        children: [
+          ClipOval(
+            child: Image.network(
+              &#39;https://avatars.githubusercontent.com/u/5081804?v=4&#39;,
+              width: 50,
+              height: 50,
+              fit: BoxFit.cover
+            ),
+          ),
+          SizedBox(width: 20),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start, 
+            children: [
+              Text(&#39;Hello, Roman&#39;,
+                style: TextStyle(
+                    color: Colors.black, 
+                    fontWeight: FontWeight.bold
+                )
+              ),
+              Text(&#39;Good Morning&#39;,
+                style: TextStyle(
+                  color: mainColor, 
+                  fontSize: 12
+                )
+              )
+            ]
+          )
+        ],
+      )
+    );
+  }
+}
+
+class AppSearch extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(&#39;Discover&#39;,
+            style: TextStyle(
+              fontWeight: FontWeight.w900, 
+              fontSize: 25
+            )
+          ),
+          SizedBox(height: 20),
+
+          // rest of the code omitted for brevity
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  height: 50,
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Row(children: [
+                      Icon(Icons.search, color: Colors.grey),
+                      SizedBox(width: 10),
+                      Text(&#39;Search&#39;, style: TextStyle(color: Colors.grey))
+                    ]
+                  )
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 10),
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: mainColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(Icons.tune, color: Colors.white)
+              )
+            ],
+          )
+        ],
+      )
+    );
+  }
+}
+
+class AppMountListView extends StatelessWidget {
+
+  @override 
+  Widget build(BuildContext context) {
+    return Container(
+      height: 150,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: mountItems.length,
+        itemBuilder: (context, index) {
+
+          // rest of the code omitted for brevity...
+
+          MountModel currentMount = mountItems[index];
+
+          return Container(
+            alignment: Alignment.bottomLeft,
+            padding: EdgeInsets.all(20),
+            margin: EdgeInsets.all(10),
+            width: 150,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: DecorationImage(
+                image: NetworkImage(currentMount.path),
+                fit: BoxFit.cover
+              )
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(currentMount.name,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold
+                  )
+                ),
+                Text(currentMount.location,
+                   style: TextStyle(
+                    color: Colors.white
+                  )
+                )
+              ]
+            )
+          );
+        }
+      )
+    );
+  }
+}
+
+class AppCategoryList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(&#39;Category&#39;,
+                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)
+                ),
+                Text(&#39;See More&#39;,
+                  style: TextStyle(color: mainColor,fontSize: 12, fontWeight: FontWeight.bold
+                  )
+                ),
+              ]
+            )
+          ),
+          Container(
+            height: 100,
+            margin: EdgeInsets.only(left: 10),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: categories.length,
+
+              // rest of the code omitted for brevity...
+
+              itemBuilder: (context, index) {
+
+                CategoryModel currentCategory = categories[index];
+
+                return Container(
+                  width: 100,
+                  margin: EdgeInsets.only(top: 10, right: 10),
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.withOpacity(0.2), width: 2),
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(currentCategory.icon, color: mainColor),
+                      Text(currentCategory.category,
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold))
+                    ]
+                  )
+                );
+              }
+
+            )
+          ),
+        ],
+      )
+    );
+  }
+}
+
+class AppBottomBar extends StatefulWidget {
+  @override
+  AppBottomBarState createState() =&gt; AppBottomBarState();
+}
+
+class AppBottomBarState extends State&lt;AppBottomBar&gt; {
+
+  List&lt;AppBottomBarItem&gt; barItems = [
+    AppBottomBarItem(icon: Icons.home, label: &#39;Home&#39;, isSelected: true),
+    AppBottomBarItem(icon: Icons.explore, label: &#39;Explore&#39;, isSelected: false),
+    AppBottomBarItem(icon: Icons.turned_in_not, label: &#39;Tag&#39;, isSelected: false),
+    AppBottomBarItem(icon: Icons.person_outline,label: &#39;Profile&#39;, isSelected: false)
+  ];
+
+  //... rest of the code omited for brevity...
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 20),
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: Offset.zero
+          )
+        ]
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: 
+        List.generate(barItems.length, (index) {
+            AppBottomBarItem currentBarItem = barItems[index];
+
+            Widget barItemWidget;
+
+            if (currentBarItem.isSelected) {
+              barItemWidget = Container(
+                padding: EdgeInsets.only(left: 15, top: 5, bottom: 5, right: 15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: mainColor
+                ),
+                child: Row(
+                  children: [
+                    Icon(currentBarItem.icon, color: Colors.white),
+                    SizedBox(width: 5),
+                    Text(currentBarItem.label, style: TextStyle(color: Colors.white))
+                  ]
+                )
+              );
+            }
+            else {
+              barItemWidget = IconButton(
+                icon: Icon(currentBarItem.icon, color: Colors.grey),
+                onPressed: () {
+                  setState(() {
+                    barItems.forEach((AppBottomBarItem item) {
+                      item.isSelected = item == currentBarItem;
+                    });
+                  });
+                }
+              );
+            }
+
+            return barItemWidget;
+          }
+        )
+      )
+    );
+  }
+}
+
+//----MODELS----
+
+class MountModel {
+  String path;
+  String name;
+  String location;
+  String description;
+
+  MountModel({
+    this.path = &#39;&#39;,
+    this.name = &#39;&#39;,
+    this.location = &#39;&#39;,
+    this.description = &#39;&#39;
+  });
+}
+
+class CategoryModel {
+  String category;
+  IconData? icon;
+
+  CategoryModel({this.category = &#39;&#39;, this.icon});
+}
+
+class AppBottomBarItem {
+  IconData? icon;
+  bool isSelected; 
+  String label;
+
+  AppBottomBarItem({
+    this.icon,
+    this.label = &#39;&#39;,
+    this.isSelected = false
+  });
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
