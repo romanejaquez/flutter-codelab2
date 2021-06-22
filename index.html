@@ -258,7 +258,25 @@
 <li>A <strong>location</strong> property, also type <strong><em>String</em></strong>, which will have the name of the location of the mount.</li>
 </ul>
 <p>Write a class called <strong>MountModel</strong> at the end of this file, adding the properties above. Add a constructor for it and initialize the properties with some default empty values. At the end, your class should look like this:</p>
-<p class="image-container"><img alt="AppMountListView" src="img/527e07225538ca53.png"></p>
+<!--<p class="image-container"><img alt="AppMountListView" src="img/527e07225538ca53.png"></p>-->
+<pre><code language="language-flutter" class="language-flutter">// populate the list of AppBottomBarItems
+
+//----MODELS----
+
+class MountModel {
+  String path;
+  String name;
+  String location;
+  String description;
+  MountModel({
+    this.path = &#39;&#39;,
+    this.name = &#39;&#39;,
+    this.location = &#39;&#39;,
+    this.description = &#39;&#39;
+  });
+}
+
+</code></pre>
 <aside class="special"><p>It is best practice to group related entities within the same area of code; in our case, I&#39;m adding all pages within a section demarcated by the comment &#34;//—PAGES—&#34; and so on. I added a section called &#34;//—MODELS—&#34; and I&#39;m adding all my models under that section for easy finding and organization.</p>
 </aside>
 <h3 is-upgraded>Creating Mocked Data from the Created Model</h3>
@@ -383,7 +401,17 @@
 <aside class="special"><p>You may have already created a section for your models in this file (demarcated by a comment &#34;//—–MODELS—–&#34;); if you did, then add this model under that section, otherwise, at the end of the file is fine.</p>
 </aside>
 <p>At the end, your class should look like this:</p>
-<p class="image-container"><img alt="AppCategoryList" src="img/137d65422c8b6aef.png"></p>
+<pre><code language="language-flutter" class="language-flutter">// populate the list of AppBottomBarItems
+
+class CategoryModel {
+  String category;
+  IconData? icon;
+
+  CategoryModel({this.category = '', this.icon});
+}
+
+</code></pre>
+<!-- <p class="image-container"><img alt="AppCategoryList" src="img/137d65422c8b6aef.png"></p> -->
 <h3 is-upgraded>Creating Mocked Data from the Category Model</h3>
 <p>Now that we have a way to structure the data we want to show (by creating a model class that will hold the values), we&#39;ll mock some data and store it in a collection so we can later feed it to our <strong><em>ListView</em></strong> widget inside the <strong>AppCategoryList</strong> widget.</p>
 <p>Create a list of <strong><em>CategoryModel</em></strong> items, called <strong>categories</strong>; make it <strong>final</strong> so we can assign default values right from the start. Populate it with the following values (you can add your own data, but for the sake of this workshop, you can grab the values provided below).</p>
@@ -503,7 +531,22 @@
 <aside class="special"><p>You may have already created a section for your models in this file (demarcated by a comment &#34;//—–MODELS—–&#34;); if you did, then add this model under that section, otherwise, at the end of the file is fine.</p>
 </aside>
 <p>Your <strong>AppBottomBarItem</strong> model class should look as follows:</p>
-<p class="image-container"><img alt="AppBottomBar" src="img/95e0a919560c829e.png"></p>
+<!-- <p class="image-container"><img alt="AppBottomBar" src="img/95e0a919560c829e.png"></p> -->
+<pre><code language="language-flutter" class="language-flutter">// populate the list of AppBottomBarItems
+
+class AppBottomBarItem {
+  IconData? icon;
+  bool isSelected; 
+  String label;
+
+  AppBottomBarItem({
+    this.icon,
+    this.label = '',
+    this.isSelected = false
+  });
+}
+
+</code></pre>
 <p>Now that we have a way to represent each of the bottom bar items, let&#39;s create a collection of these items inside of the State so we can keep track of which one is selected.</p>
 <p>Proceed to the <strong>AppBottomBarState</strong> class; inside of the class, above the build method, create a property called <strong>barItems</strong>; make it a <strong>List</strong> of <strong>AppBottomBarItem</strong> models, and initialize it with an empty array, as follows:</p>
 <p class="image-container"><img alt="AppBottomBar" src="img/129fbcb52d8f71f1.png"></p>
