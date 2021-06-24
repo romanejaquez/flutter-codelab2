@@ -179,6 +179,19 @@ class AppHeader extends StatelessWidget {
 <p>Add the first child to this Row, an avatar image clipped as a circle. We&#39;ll use a <strong>ClipOval</strong> widget - very suitable for these cases - which in turn will wrap an <strong>Image</strong> widget that we&#39;ll fetch from the network, with fixed dimensions (50px X 50px) with a fit of <strong>BoxFit.cover</strong> so it fills up the dimensions of the image, maintaining its aspect ratio.</p>
 <aside class="special"><p>You can grab any image off the internet - I grabbed my Github account&#39;s <a href="https://avatars.githubusercontent.com/u/5081804?v=4" target="_blank">avatar image</a>.</p>
 </aside>
+<p>If you want to copy / paste it, here's the <strong>ClipOval</strong> code. Add it as the first child of the <strong>Row</strong> widget:</p>
+<pre><code language="language-flutter" class="language-flutter">
+// paste as the first child of the Row widget above:
+
+ClipOval(
+  child: Image.network(
+    'https://avatars.githubusercontent.com/u/5081804?v=4', // replace if you want
+    width: 50,
+    height: 50,
+    fit: BoxFit.cover
+  ),
+),
+</code></pre>     
 <p class="image-container"><img alt="AppHeader" src="img/406414b174141dc5.png"></p>
 <p>Next, add a <strong>Column</strong> widget, which will lay down the two <strong>Text</strong> widgets one on top of each other as a unit, next to the <strong>Image</strong>.</p>
 <p class="image-container"><img alt="AppHeader" src="img/81a1bfb658acb5e1.png"></p>
