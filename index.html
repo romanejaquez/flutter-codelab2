@@ -790,24 +790,26 @@ List&lt;AppBottomBarItem&gt; barItems = [
 </ul>
 </li>
 </ul>
-<p>To help you with the coding, grab the code below, and paste it inside the <strong>Container</strong> widget, on top of the child:</p>
+<p>To help you with the coding, grab the code below, and replace the whole return statement, which returns the <strong>Container</strong> widget inside the build method:</p>
 <pre><code language="language-flutter" class="language-flutter">
-// return Container
-margin: EdgeInsets.only(top: 20),
-padding: EdgeInsets.all(20),
-decoration: BoxDecoration(
-  color: Colors.white,
-  boxShadow: [
-    BoxShadow(
-      color: Colors.black.withOpacity(0.1),
-      blurRadius: 10,
-      offset: Offset.zero
-    )
-  ]
-),
-// child: Text('Bottom Bar')
+// replace the whole return statement inside the build method
+return Container(
+  margin: EdgeInsets.only(top: 20),
+  padding: EdgeInsets.all(20),
+  decoration: BoxDecoration(
+    color: Colors.white,
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.1),
+        blurRadius: 10,
+        offset: Offset.zero
+      )
+    ]
+  ),
+  child: Text('Bottom Bar')
+);
 </code></pre>
-
+<p>Your code should look as follows:</p>
 <p class="image-container"><img alt="AppBottomBar" src="img/5f225342bfc71b76.png"></p>
 <aside class="special"><p>From this point forward, we&#39;ll be contentrating only on the <strong>Container</strong> object and showing you what&#39;s inside that block of code as we build it, for brevity and space.</p>
 </aside>
