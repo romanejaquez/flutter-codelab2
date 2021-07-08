@@ -780,7 +780,7 @@ class AppBottomBarItem {
 </aside>
 <pre><code language="language-flutter" class="language-flutter">// populate the list of AppBottomBarItems
 
-final List&lt;AppBottomBarItem&gt; barItems = [
+List&lt;AppBottomBarItem&gt; barItems = [
     AppBottomBarItem(icon: Icons.home, label: &#39;Home&#39;, isSelected: true),
     AppBottomBarItem(icon: Icons.explore, label: &#39;Explore&#39;, isSelected: false),
     AppBottomBarItem(icon: Icons.turned_in_not, label: &#39;Tag&#39;, isSelected: false),
@@ -861,6 +861,18 @@ if (currentBarItem.isSelected) {
 </aside>
 <p>The child of this container will be an icon and a label, separated by some space, so we&#39;ll resort to a <strong>Row</strong> widget to lay these out, so add a <strong>Row</strong> widget as a child of this <strong>Container</strong>.</p>
 <p>Add an <strong>Icon</strong> widget, and using the <strong>currentBarItem</strong> property to fetch the <strong>icon</strong> property out of it, setting it to a white color. Add space next to it by using a <strong>SizedBox</strong> of 5px width, and then a <strong>Text</strong> widget, feeding into it the <strong>currentBarItem.label</strong> to show the name, with a color of white as well.</p>
+<p>Here's the code for the child of this Container - the Row widget:</p>
+<pre><code language="language-flutter" class="language-flutter">
+// add this Row widget as the child of the Container above:
+
+child: Row(
+  children: [
+    Icon(currentBarItem.icon, color: Colors.white),
+    SizedBox(width: 5),
+    Text(currentBarItem.label, style: TextStyle(color: Colors.white))
+  ]
+)
+</code></pre>
 <p>Your <strong>Container</strong>&#39;s child (the <strong>Row</strong> widget) should look like this afterwards:</p>
 <p class="image-container"><img alt="AppBottomBar" src="img/dcfdacc96a122ce8.png"></p>
 <p>We&#39;re all set with the structure for when the item is selected. Now let&#39;s do for the normal / non-selected visual state.</p>
